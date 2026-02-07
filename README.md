@@ -2,11 +2,17 @@
 
 A minimal Spring Boot REST API for a social media platform with user authentication, profiles, and posts featuring actual file upload capabilities.
 
+## 🚀 Live Deployment
+
+**Production URL:** https://social-media-backend-production-8924.up.railway.app/api
+
+Status: ✅ Deployed on Railway
+
 ## Tech Stack
 
 - **Java 21 (LTS)**
 - **Spring Boot 4.0.2**
-- **MongoDB**
+- **MongoDB Atlas**
 - **Spring Security + JWT**
 - **File Storage (MultipartFile)**
 - **Lombok**
@@ -18,33 +24,54 @@ A minimal Spring Boot REST API for a social media platform with user authenticat
 - Maven 3.9+
 - MongoDB Atlas account (or local MongoDB 4.4+ on `localhost:27017`)
 
-## Setup
+## Quick Start
 
-1. **MongoDB Atlas Setup**
-   - Create a free cluster at https://www.mongodb.com/cloud/atlas
-   - Create a database user with username and password
-   - Whitelist your IP address (or use 0.0.0.0/0 for development)
-   - Get your connection string from "Connect" → "Connect your application"
-   - Update `application.properties` with your connection string
+### Option 1: Use Deployed Backend (Recommended)
 
-   **OR use local MongoDB:**
+Your backend is already deployed! Just use:
+```
+https://social-media-backend-production-8924.up.railway.app/api
+```
+
+### Option 2: Run Locally
+
+1. **Clone and configure**
    ```bash
-   # Download from https://www.mongodb.com/try/download/community
-   # Or use Docker:
-   docker run -d -p 27017:27017 --name mongodb mongo:latest
+   git clone <your-repo>
+   cd social-media-backend
    ```
 
-2. **Clone and Build**
+2. **Update MongoDB connection** (optional - uses Atlas by default)
+   Edit `src/main/resources/application.properties`
+
+3. **Build and run**
    ```bash
-   mvn clean install
+   mvnw clean install
+   mvnw spring-boot:run
    ```
 
-3. **Run**
+Server starts at: `http://localhost:8080`
+
+## 📦 Deployment
+
+### Deploy to Railway
+
+1. **Commit your changes**
    ```bash
-   mvn spring-boot:run
+   git add .
+   git commit -m "Update configuration"
+   git push origin main
    ```
 
-Server starts at: `http://localhost:8081`
+2. **Railway auto-deploys** (if configured)
+   - Or manually trigger from Railway dashboard
+
+3. **Test deployment**
+   ```powershell
+   .\test-deployment.ps1
+   ```
+
+See [RAILWAY_DEPLOYMENT.md](RAILWAY_DEPLOYMENT.md) for detailed instructions.
 
 ## Configuration
 
