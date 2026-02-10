@@ -30,8 +30,12 @@ public class AuthController {
         try {
             User registeredUser = userService.registerUser(user);
             
+            // Generate token immediately after signup (auto-login)
+            String token = jwtUtil.generateToken(registeredUser.getEmail());
+            
             Map<String, Object> response = new HashMap<>();
             response.put("message", "User registered successfully!");
+            response.put("token", token);
             response.put("user", registeredUser);
             
             return ResponseEntity.status(HttpStatus.CREATED).body(response);

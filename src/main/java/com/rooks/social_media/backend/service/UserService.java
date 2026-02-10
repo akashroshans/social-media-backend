@@ -47,9 +47,13 @@ public class UserService implements UserDetailsService {
         }
     }
 
-    public User updateProfile(String userId, String bio, MultipartFile profilePicture) throws Exception {
+    public User updateProfile(String userId, String name, String bio, MultipartFile profilePicture) throws Exception {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new Exception("User not found"));
+        
+        if (name != null && !name.trim().isEmpty()) {
+            user.setName(name);
+        }
         
         if (bio != null) {
             user.setBio(bio);

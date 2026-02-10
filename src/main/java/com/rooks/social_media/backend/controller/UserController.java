@@ -49,13 +49,14 @@ public class UserController {
 
     @PutMapping(value = "/me", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<?> updateProfile(
+            @RequestParam(required = false) String name,
             @RequestParam(required = false) String bio,
             @RequestParam(required = false) MultipartFile profilePicture) {
         try {
             String email = getLoggedInUserEmail();
             User user = userService.findByEmail(email);
             
-            User updatedUser = userService.updateProfile(user.getId(), bio, profilePicture);
+            User updatedUser = userService.updateProfile(user.getId(), name, bio, profilePicture);
             
             Map<String, Object> response = new HashMap<>();
             response.put("message", "Profile updated successfully");
